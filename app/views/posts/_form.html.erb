@@ -1,0 +1,38 @@
+<%= form_for(@post, html: {role: "form"}) do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <script>
+
+    $(document).ready(function() {
+     $('select#type').select2();
+    });
+
+  </script>
+
+
+
+  <br><br>
+  <div class="form-group clearfix">
+    <%= f.label :title %><br>
+    <div class="col-sm-4"><%= f.text_field :title,  {class: "form-control"} %></div>
+    <div class="col-sm-3"><%= select_tag(:type,
+      options_for_select([['All', 1], ['Co', 2], ['Bought', 3], ['View', 4], ['Top API', 5]] ), {style: "width:100%;"}) %></div>
+  </div>
+
+
+
+  <div class="actions clearfix">
+    <%= f.submit :class => "btn btn-primary" %>
+  </div>
+<% end %>
